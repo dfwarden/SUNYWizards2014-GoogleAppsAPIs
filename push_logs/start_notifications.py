@@ -9,7 +9,7 @@ from apiclient import discovery, errors as apiclient_errors
 
 
 # Read .p12 file, use it to authorize HTTP requests to Google API.
-f = file('path-to-p12-file'rb')
+f = file('path-to-p12-file', 'rb')
 serviceacct_key = f.read()
 f.close()
 credentials = oauth2client.client.SignedJwtAssertionCredentials(
@@ -28,6 +28,6 @@ expire = datetime.now() + timedelta(hours=6)  # Max allowed by google
 expire_unix = int(time.mktime(expire.timetuple()))
 expire_milliseconds = expire_unix * 1000
 
-reports.activities().watch(userKey='all', applicationName='admin', body=dict(type='web_hook', address='url-of-pushtolog.php', id='unique-admin-channel-name'.format(expire_unix), expiration=expire_milliseconds)).execute()
-reports.activities().watch(userKey='all', applicationName='login', body=dict(type='web_hook', address='url-of-pushtolog.php', id='unique-login-channel-name'.format(expire_unix))).execute()
-reports.activities().watch(userKey='all', applicationName='drive', body=dict(type='web_hook', address='url-of-pushtolog.php', id='unique-drive-channel-name'.format(expire_unix))).execute()
+reports.activities().watch(userKey='all', applicationName='admin', body=dict(type='web_hook', address='url-of-pushtolog.php', id='unique-admin-channel-name', expiration=expire_milliseconds)).execute()
+reports.activities().watch(userKey='all', applicationName='login', body=dict(type='web_hook', address='url-of-pushtolog.php', id='unique-login-channel-name', expiration=expire_milliseconds)).execute()
+reports.activities().watch(userKey='all', applicationName='drive', body=dict(type='web_hook', address='url-of-pushtolog.php', id='unique-drive-channel-name', expiration=expire_milliseconds)).execute()
